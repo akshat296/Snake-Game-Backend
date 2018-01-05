@@ -1,9 +1,9 @@
 const express = require('express')
 const multer = require('multer')
 
-let controller = require('./Services/usersController');
+let router = require('./router/router');
 
-const PORT = process.env.PORT || 9016
+const PORT = process.env.PORT || 9031;
 const app = express()
 
 
@@ -14,7 +14,7 @@ app.use("/",(req,res,next)=>{
 	next();
 })
 
-app.use("/",controller)
+app.use("/",router)
 app.listen(PORT,(err)=>{
 	if(err)
 		console.log(err)

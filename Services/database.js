@@ -3,7 +3,7 @@ var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
   password : 'root',
-  database : 'login',
+  database : 'user',
   multipleStatements: true
 });
 connection.connect(function(err){
@@ -23,7 +23,19 @@ let getAllUsers =  function(){
 		})
 	}) 
 };
+let createUser =  function(name,email,username,email){
+    console.log('name ',name);
+	return new Promise((success,reject)=>{
+
+		connection.query(`INSERT INTO users (name,email,username,password) VALUES ('${name}','${email}','${username}','${password}')`,(err,data)=>{
+			if(err){
+				reject(err)}
+			success(data)
+			
+		})
+	}) 
+};
 
 
 
-module.exports = {getAllUsers};
+module.exports = {getAllUsers,createUser};
