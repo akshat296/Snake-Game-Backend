@@ -23,11 +23,20 @@ let getAllUsers =  function(){
 		})
 	}) 
 };
-let createUser =  function(name,email,username,email){
-    console.log('name ',name);
+let createUser =  function(name,email,username,password){
 	return new Promise((success,reject)=>{
-
 		connection.query(`INSERT INTO users (name,email,username,password) VALUES ('${name}','${email}','${username}','${password}')`,(err,data)=>{
+			if(err){
+				reject(err)}
+			success(data)
+			
+		})
+	}) 
+};
+let checkUser =  function(email_or_username,password){
+	console.log("test",email_or_username);
+	return new Promise((success,reject)=>{
+		connection.query(`Select name from users where email = ('${email_or_username}' or username = '${email_or_username}')  and password = '${password}'`,(err,data)=>{
 			if(err){
 				reject(err)}
 			success(data)
@@ -38,4 +47,4 @@ let createUser =  function(name,email,username,email){
 
 
 
-module.exports = {getAllUsers,createUser};
+module.exports = {getAllUsers,createUser,checkUser};

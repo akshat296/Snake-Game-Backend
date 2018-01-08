@@ -11,6 +11,7 @@ let router = express.Router()
 //router.post("/upload",upload.single("pdffile"),uploadFile)
 router.get("/users",userController.showUsers);
 router.post("/users/create",userController.createUser);
+router.get("/users/getuser",userController.checkUser);
 //router.get("/file/:id",getFile)
 
 module.exports =  router;

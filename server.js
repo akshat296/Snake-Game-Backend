@@ -3,8 +3,8 @@ const multer = require('multer')
 
 let router = require('./router/router');
 
-const PORT = process.env.PORT || 9031;
-const app = express()
+const PORT = process.env.PORT || 9001;
+const app = express();
 
 
 app.use("/",(req,res,next)=>{
@@ -17,7 +17,7 @@ app.use("/",(req,res,next)=>{
 app.use("/",router)
 app.listen(PORT,(err)=>{
 	if(err)
-		console.log(err)
-	console.log(`app is listening on port ${PORT}`)
+		console.log(err);
+	console.log(`app is listening on port ${PORT}`);
 })
 
