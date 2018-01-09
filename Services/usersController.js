@@ -4,11 +4,10 @@ let showUsers =  async function(req,res){
 	res.header("Content-type","Application/json")
 	try{	
 		let result = await database.getAllUsers();
-		console.log("sat",result);
 		if(result){
 			res.json({
 				status:"OK",
-				files:result
+				result:result
 			});
 		}
 	}catch(err){
@@ -20,10 +19,7 @@ let showUsers =  async function(req,res){
 }
 let createUser =  async function(req,res){
 	res.header("Content-type","Application/json")
-	console.log("te");
 	try{	
-		//console.log("tesst",req.params('name'));
-		console.log("tesst email param",req.param('email'));
 		let result = await database.createUser(req.param('name'),
 			req.param('email'),
 			req.param('username'),
@@ -31,7 +27,7 @@ let createUser =  async function(req,res){
 		if(result){
 			res.json({
 				status:"OK",
-				files:result
+				result:result
 			});
 		}
 	}catch(err){
@@ -43,15 +39,16 @@ let createUser =  async function(req,res){
 }
 let checkUser =  async function(req,res){
 	res.header("Content-type","Application/json")
-	console.log("te",req.param('email_or_username'));
 	try{	
 		let result = await database.checkUser(req.param('email_or_username'),
-			req.param('password'),
+			req.param('password')
 			);
+			var newObj = Object.assign({}, ...result)
+			console.log("database",newObj)
 		if(result){
 			res.json({
 				status:"OK",
-				files:result
+				result:Object.assign({}, ...result)
 			});
 		}
 	}catch(err){

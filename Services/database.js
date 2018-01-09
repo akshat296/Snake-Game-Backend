@@ -2,7 +2,7 @@ var mysql      = require('mysql');
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
-  password : 'root',
+  password : '',
   database : 'user',
   multipleStatements: true
 });
@@ -34,7 +34,6 @@ let createUser =  function(name,email,username,password){
 	}) 
 };
 let checkUser =  function(email_or_username,password){
-	console.log("test",email_or_username);
 	return new Promise((success,reject)=>{
 		connection.query(`Select name from users where email = ('${email_or_username}' or username = '${email_or_username}')  and password = '${password}'`,(err,data)=>{
 			if(err){
