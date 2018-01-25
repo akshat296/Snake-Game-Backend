@@ -8,7 +8,7 @@ let showUsers =  async function(req,res){
 		if(result){
 			res.json({
 				status:"OK",
-				files:result
+				result:result
 			});
 		}
 	}catch(err){
@@ -31,7 +31,7 @@ let createUser =  async function(req,res){
 		if(result){
 			res.json({
 				status:"OK",
-				files:result
+				result:result
 			});
 		}
 	}catch(err){
@@ -43,7 +43,7 @@ let createUser =  async function(req,res){
 }
 let checkUser =  async function(req,res){
 	res.header("Content-type","Application/json")
-	console.log("te",req.param('email_or_username'));
+	//console.log("te",req.param('email_or_username'));
 	try{	
 		let result = await database.checkUser(req.param('email_or_username'),
 			req.param('password'),
@@ -51,7 +51,7 @@ let checkUser =  async function(req,res){
 		if(result){
 			res.json({
 				status:"OK",
-				files:result
+				result:result
 			});
 		}
 	}catch(err){
