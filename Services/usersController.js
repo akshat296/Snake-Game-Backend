@@ -19,11 +19,13 @@ let showUsers =  async function(req,res){
 }
 let createUser =  async function(req,res){
 	res.header("Content-type","Application/json")
+	
 	try{	
-		let result = await database.createUser(req.param('name'),
-			req.param('email'),
-			req.param('username'),
-			req.param('password'));
+		
+		let result = await database.createUser(req.query['name'],
+			req.query['email'],
+			req.query['username'],
+			req.query['password'])
 		if(result){
 			res.json({
 				status:"OK",
@@ -40,15 +42,15 @@ let createUser =  async function(req,res){
 let checkUser =  async function(req,res){
 	res.header("Content-type","Application/json")
 	try{	
-		let result = await database.checkUser(req.param('email_or_username'),
-			req.param('password')
+		let result = await database.checkUser(req.query['email_or_username'],
+			req.query['password'],
 			);
 			var newObj = Object.assign({}, ...result)
 			console.log("database",newObj)
 		if(result){
 			res.json({
 				status:"OK",
-				result:Object.assign({}, ...result)
+				result:result
 			});
 		}
 	}catch(err){
