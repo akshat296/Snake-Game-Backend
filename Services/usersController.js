@@ -60,5 +60,25 @@ let checkUser =  async function(req,res){
 		});
 	}
 }
+let userAlreadyExists =  async function(req,res){
+	res.header("Content-type","Application/json")
+	try{	
+		let result = await database.userAlreadyExists(req.query['username']);
+			var newObj = Object.assign({}, ...result)
+			console.log("database",newObj)
+		if(result){
+			res.json({
+				status:"OK",
+				result:result
+			});
+		}
+	}catch(err){
+		res.json({
+			status:"ERROR",
+			error:err
+		});
+	}
+}
 
-module.exports = {showUsers,createUser,checkUser};
+
+module.exports = {showUsers,createUser,checkUser,userAlreadyExists};

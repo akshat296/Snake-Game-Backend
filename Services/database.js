@@ -2,7 +2,7 @@ var mysql      = require('mysql');
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
-  password : '',
+  password : 'root',
   database : 'user',
   multipleStatements: true
 });
@@ -35,9 +35,18 @@ let createUser =  function(name,email,username,password){
 };
 let checkUser =  function(email_or_username,password){
 	console.log('email_or_username==>',email_or_username);
-	;
 	return new Promise((success,reject)=>{
 		connection.query(`Select name from users where (email = '${email_or_username}' or username = '${email_or_username}')  and password = '${password}'`,(err,data)=>{
+			if(err){
+				reject(err)}
+			success(data)
+		});
+	});
+};
+
+let userAlreadyExists =  function(username){
+	return new Promise((success,reject)=>{
+		connection.query(`Select name from users where username = '${username}'`,(err,data)=>{
 			if(err){
 				reject(err)}
 			success(data)
@@ -47,5 +56,4 @@ let checkUser =  function(email_or_username,password){
 };
 
 
-
-module.exports = {getAllUsers,createUser,checkUser};
+module.exports = {getAllUsers,createUser,checkUser, userAlreadyExists};

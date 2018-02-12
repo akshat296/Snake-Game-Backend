@@ -12,6 +12,6 @@ let router = express.Router()
 router.get("/users",userController.showUsers);
 router.post("/users/create",userController.createUser);
 router.get("/users/getuser",userController.checkUser);
-//router.get("/file/:id",getFile)
+router.get("/users/userAlreadyExists",userController.userAlreadyExists);
 
 module.exports =  router;
