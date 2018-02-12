@@ -43,7 +43,7 @@ let checkUser =  async function(req,res){
 	res.header("Content-type","Application/json")
 	try{	
 		let result = await database.checkUser(req.query['email_or_username'],
-			req.query['password'],
+			req.query['password']
 			);
 			var newObj = Object.assign({}, ...result)
 			console.log("database",newObj)
